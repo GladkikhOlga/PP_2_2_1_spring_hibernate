@@ -8,4 +8,7 @@ public interface UserService {
     void add(User user);
     List<User> listUsers();
 
+    User findUser(String car_model, int car_series);
+
+
 }

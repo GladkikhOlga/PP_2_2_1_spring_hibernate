@@ -27,10 +27,12 @@ public class UserDaoImp implements UserDao {
    }
 
    @Override
-   public User findUser(String car_model, int car_series) {
-      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User where :car_model and :car_series", User.class)
-              .setParameter ("car_model", car_model)
-              .setParameter ("car_series", car_series);
+   @SuppressWarnings("unchecked")
+   public User findUser(String model, int series) {
+      TypedQuery<User> query = sessionFactory.getCurrentSession()
+              .createQuery("from User where car.model = :model and car.series = :series");
+      query.setParameter("model", model);
+      query.setParameter("series", series);
       return query.getSingleResult();
    }
 }
